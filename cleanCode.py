@@ -12,7 +12,6 @@ file = open(filename,'r')
 fileTxt =file.read()
 code = re.split('(;|\n)',fileTxt)
 
-#print code
 
 for line_num,line in enumerate(code):
 
@@ -26,8 +25,18 @@ for line_num,line in enumerate(code):
             
     if(delete):
         code[line_num]=''
-        code[line_num+1]=''
+        code[line_num+1]='' #this wipes out the semi colon as well
 
-file=open(filename,'w')
-file.writelines(code)
+
+fluffed_codeTxt = ''.join(code) # this is one huge string obtained after joining all the code lines
+
+#________________ the following part removes the blank left out lines as well
+
+file =open(filename,'w')
+fluffed_code = re.split('\n',fluffed_codeTxt)
+for line in fluffed_code:
+    if(line.strip()) :
+        file.write(line)
+        file.write('\n')
+
 file.close()
