@@ -6,8 +6,7 @@ print url
 website= requests.get(url)
 
 html = website.text
-print html
 linklist = re.findall('"((http|ftp)s?://.*?)"',html)
-print linklist
+#print linklist
 for link in linklist:
     print link[0]
