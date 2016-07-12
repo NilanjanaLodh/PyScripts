@@ -1,0 +1,9 @@
+#!/usr/bin/python
+from sys import argv
+
+op_filename= argv[1]
+opfileobj=open(op_filename,'w')
+
+templateTxt=open('/usr/local/bin/template.cpp').read()
+
+opfileobj.write(templateTxt)
