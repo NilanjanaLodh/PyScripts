@@ -3,7 +3,7 @@
 #python  download.py pdf http://www.example.com 
 # downloads all pdfs from example.com
 
-import pyperclip
+import sys
 import urllib
 import requests
 from bs4 import BeautifulSoup
@@ -30,6 +30,7 @@ for link in all_links:
     if preferredfile_re.search(href) :
         valid_links.append(href)
 
+print len(valid_links) , " files found."
 for i,link in enumerate(valid_links):
     if not absolute_url_re.search(link):
         #this means this is a relative url, and we need to make it absolute
@@ -38,6 +39,7 @@ for i,link in enumerate(valid_links):
     valid_links[i]=valid_links[i].replace(" ","%20")#take care of the encoding        
     file_name= link.split('/')[-1]
     print 'Downloading ' , file_name ,' ....  ',
+    sys.stdout.flush()
     urllib.urlretrieve(valid_links[i],file_name)
     print 'done!'
 
