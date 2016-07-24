@@ -12,11 +12,10 @@ from sys import argv
 import re
 
 file_ext = argv[1]
-url = argv[2] 
+url = raw_input('> ')
 website= requests.get(url)
 #print 'retrieved website'
 html = website.text
-
 soup = BeautifulSoup(html,"lxml")
 all_links=soup.find_all("a")
 
@@ -40,6 +39,8 @@ for i,link in enumerate(valid_links):
     valid_links[i]=valid_links[i].replace(" ","%20")#take care of the encoding        
     file_name= link.split('/')[-1]
     print 'Downloading ' , file_name ,' ....  ',
-    sys.stdout.flush() # doesn't wait for the download to finish before printing this to screen
+    sys.stdout.flush()
     urllib.urlretrieve(valid_links[i],file_name)
     print 'done!'
+
+
